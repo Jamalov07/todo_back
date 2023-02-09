@@ -57,6 +57,15 @@ export class UserController {
     return this.userService.getUsers();
   }
 
+
+  @Delete('del/:id')
+  async deleteWork(
+    @Param('id') id: number,
+    @cookieGetter('refresh_token') refreshToken: string,
+  ) {
+    return this.userService.deleteWork(id, refreshToken);
+  }
+
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.userService.delete(+id);
@@ -112,13 +121,6 @@ export class UserController {
     return this.userService.updateWork(workBody, refreshToken, id);
   }
 
-  @Delete('del/:id')
-  async deleteWork(
-    @Param('id') id: number,
-    @cookieGetter('refresh_token') refreshToken: string,
-  ) {
-    return this.userService.deleteWork(id, refreshToken);
-  }
 
   @Get(':id')
   getOne(@Param('id') id: string) {
